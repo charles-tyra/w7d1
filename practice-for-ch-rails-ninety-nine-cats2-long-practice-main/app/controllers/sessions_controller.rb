@@ -18,6 +18,11 @@ class SessionsController < ApplicationController
     end
 
     def destroy
+      if current_user != nil
+         current_user.reset_session_token!
+      end
+      session[:session_token] = nil
+      current_user = nil
     end
 
 end
